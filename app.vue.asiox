@@ -1,0 +1,40 @@
+<template>
+  <div>
+    <button @click="makeFirstRequest">Make First Request</button>
+    <button @click="makeSecondRequest">Make Second Request</button>
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
+export default {
+  methods: {
+    makeFirstRequest() {
+      // Configuring Axios to include credentials such as cookies
+      axios.get('https://f490-5-77-90-70.ngrok-free.app/api/first')
+        .then(response => {
+          console.log('First request data:', response.data);
+        })
+        .catch(error => {
+          console.error('Error making the first request:', error);
+        });
+    },
+    makeSecondRequest() {
+      // Configuring Axios to include credentials such as cookies
+      axios.get('https://f490-5-77-90-70.ngrok-free.app/api/second')
+        .then(response => {
+          console.log('Second request data:', response.data);
+        })
+        .catch(error => {
+          console.error('Error making the second request:', error);
+        });
+    }
+  }
+}
+</script>
+
+<style>
+/* Add your styles here */
+</style>

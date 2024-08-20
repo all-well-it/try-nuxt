@@ -1,0 +1,43 @@
+<template>
+  <div>
+    <button @click="makeFirstRequest">Make First Request</button>
+    <button @click="makeSecondRequest">Make Second Request</button>
+  </div>
+</template>
+
+<script>
+export default {
+  methods: {
+    async makeFirstRequest() {
+      try {
+        const response = await fetch('http://localhost:8080/api/first', {
+          method: 'GET',
+          credentials: 'include' // Ensure cookies are included in the request
+        });
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        console.log('First request data:', data);
+      } catch (error) {
+        console.error('Error making the first request:', error);
+      }
+    },
+    async makeSecondRequest() {
+      try {
+        const response = await fetch('http://localhost:8080/api/second', {
+          method: 'GET',
+          credentials: 'include' // Ensure cookies received from the first request are included
+        });
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        console.log('Second request data:', data);
+      } catch (error) {
+        console.error('Error making the second request:', error);
+      }
+    }
+  }
+}
+</script>
+
+<style>
+/* Add your styles here */
+</style>
